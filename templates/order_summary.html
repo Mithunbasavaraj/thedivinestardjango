@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <main>
+    <main id="main">
+        <div class="container">
+          <a class="d-flex justify-content-end icon-whatsapp  mt-5" href="http://wa.me/+919164049777"><i class="bi bi-whatsapp "></i></a>
+    
+          <div class="row  mt-3">
+            <div class="col-lg-6 col-md-12">
+              <div class="main-image col-12">
+                <img id="thumbnail" src="{%static "img/cartslider/img5.jpg" %}"  alt="" />
+              </div>
+              <div class="pic-center">
+                <img
+                onclick="change_image(this)"
+                src="{%static "img/cartslider/img5.jpg" %}"
+              />
+                <img
+                  onclick="change_image(this)"
+                  src="{%static "img/cartslider/img6.jpg" %}"
+                />
+                <img
+                  onclick="change_image(this)"
+                  src="{%static "img/cartslider/img7.jpg" %}"
+                />
+                <img
+                  onclick="change_image(this)"
+                  src="{%static "img/cartslider/img8.jpg" %}"
+                />
+               
+               
+              </div>
+            </div>
+            <article class="product col-lg-6 col-md-12">
+             
+              <div class="content col-12">
+                <h1>The Divine Star Protection Pendant</h1>
+               <p>The Divine Star’s Protection pendant is the most powerful tool to remove any Negativity and Negative Energies from you. The Ultimate Protection Pendant for you and your loved ones.</p>
+               <h6 class="mt-2"><b>We accept all payments</b></h6>
+               <div class="payment-img">
+                <img src="{%static "img/payment/master.png" %}" alt="">
+                <img src="{%static "img/payment/visa.png" %}" alt="">
+                <img src="{%static "img/payment/gpay.png" %}" alt="">
+                <img src="{%static "img/payment/apay.png" %}" alt="">
+                <img src="{%static "img/payment/america.png" %}" alt="">
+                <img src="{%static "img/payment/bank.png" %}" alt="">
+                <img src="{%static "img/payment/ideal.png" %}" alt="">
+              </div>
+    
+              </div>
+              <footer class="content col-12">
+                {% comment %} <span class="qt-minus">-</span>
+                <span class="qt">1</span>
+                <span class="qt-plus">+</span>{% endcomment %}
+               
+                    {% for order_item in object.items.all %}
+                    <a   class="qt-minus" href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                    <span class="qt"> {{ order_item.quantity }}</span>
+                    
+                <a  class="qt-plus" href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+                <h2 class="price">
+                    ₹ 4999
+                  </h2>
+                <h2 class="full-price"> 
+                {% if order_item.item.discount_price %}
+                ₹{{ order_item.get_total_discount_item_price }}
+               
+            {% else %}
+                ₹{{ order_item.get_total_item_price }}
+            {% endif %}
+           
+                {% endfor %}
+        </h2>
+               
+              </footer>
+              <div class="float-end">
+                <h3 class="shipping pt-5 left ">Shipping: ₹<span>40</span></h3>
+              </div>
+            </article>
+            <h4>
+    
+              <b  class="float-end" style="color: #29265B;">Category : The Divine Star's Protection Pendant</b>
+            </h4>
+            <div id="site-footer">
+              <div class="container clearfix">
+                <div class="right">
+                  <h1 class="total">Total: <span><b>₹{{ object.get_total  }}</b></span></h1>
+                  <a href="/checkout/" class="btn" style=" background: #29265b; color:#fff;">Checkout</a>
+                </div>
+              </div>
+          </div>
+        </div>
+        
+     </main>
+      <script>  function change_image(image) {
+        var container = document.getElementById("thumbnail");
+        container.src = image.src;
+      }</script>
+     
+{% endblock content %}
