@@ -210,8 +210,8 @@ class CheckoutView(View):
 
                 if payment_option == 'S':
                     return redirect('core:payment', payment_option='stripe')
-                elif payment_option == 'P':
-                    return redirect('core:payment', payment_option='paypal')
+                elif payment_option == 'C':
+                    return redirect('core:payment', payment_option='COD')
                 else:
                     messages.warning(
                         self.request, "Invalid payment option selected")
@@ -227,7 +227,7 @@ class PaymentView(View):
         if order.billing_address:
             context = {
                 'order': order,
-                'DISPLAY_COUPON_FORM': False,
+                'DISPLAY_COUPON_FORM': True,
                 'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
             }
             userprofile = self.request.user.userprofile
@@ -489,10 +489,10 @@ class AddCouponView(View):
             try:
                 code = form.cleaned_data.get('code')
                 order = Order.objects.get(
-                    user=self.request.user, ordered=False)
-                order.coupon = get_coupon(self.request, code)
+                user=self.request.user, ordered=False)
+                Coupon = get_coupon(self.request, code)
                 order.save()
-                messages.success(self.request, "Successfully added coupon")
+                # messages.success(self.request, "Successfully added coupon")
                 return redirect("core:checkout")
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")

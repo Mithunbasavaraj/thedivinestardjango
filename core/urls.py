@@ -39,7 +39,5 @@ urlpatterns = [
     path('certification/',certification),
     path('contact/',contact),
     path('privacypolicy/',privacypolicy),
-    path('conditions/',conditions)
-
-    
+    path('conditions/',conditions)  
     ]
