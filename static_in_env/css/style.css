@@ -619,9 +619,17 @@ main{
   height: 380px;
   width: 380px;
   border-radius: 5px;
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+.main-image img:hover{
+  transform: scale(1.25);
 }
 .main-image {
+  height: 380px;
+  width: 380px;
   text-align: center;
+  overflow: hidden;
 }
 .pic-center {
   text-align: center;

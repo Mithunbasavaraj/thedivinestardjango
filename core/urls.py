@@ -16,7 +16,8 @@ from .views import (
     certification,
     contact,
     privacypolicy,
-    conditions
+    conditions,
+    faq
 )
 
 app_name = 'core'
@@ -39,5 +40,6 @@ urlpatterns = [
     path('certification/',certification),
     path('contact/',contact),
     path('privacypolicy/',privacypolicy),
-    path('conditions/',conditions)  
+    path('conditions/',conditions),
+    path('faq/',faq)  
     ]
